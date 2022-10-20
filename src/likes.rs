@@ -1,4 +1,4 @@
-use crate::client::{VkClient, response::BaseVkResponse};
+use crate::client::{VkClient, response::VkError};
 
 pub mod methods;
 pub mod query;
@@ -8,7 +8,7 @@ pub mod response;
 pub mod tests;
 
 pub async fn is_liked (client: &VkClient, params: query::IsLikedQuery)
-    -> BaseVkResponse<response::IsLikedResponse> {
+    -> Result<response::IsLikedResponse, VkError> {
     client.base_get::<query::IsLikedQuery, response::IsLikedResponse>(
         methods::IS_LIKED,
         Some(params)
@@ -16,7 +16,7 @@ pub async fn is_liked (client: &VkClient, params: query::IsLikedQuery)
 }
 
 pub async fn add (client: &VkClient, params: query::AddLikeQuery)
-    -> BaseVkResponse<response::AddLikeResponse> {
+    -> Result<response::AddLikeResponse, VkError> {
     client.base_get::<query::AddLikeQuery, response::AddLikeResponse>(
         methods::ADD,
         Some(params)

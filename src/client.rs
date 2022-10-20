@@ -75,7 +75,7 @@ impl VkClient {
         Self::init(&token)
     }
 
-    pub async fn base_get<P, T>(&self, method: &str, params: Option<P>) -> BaseVkResponse<T>
+    pub async fn base_get<P, T>(&self, method: &str, params: Option<P>) -> Result<T, VkError>
         where P: Serialize,
         T: DeserializeOwned
     {
@@ -104,10 +104,15 @@ impl VkClient {
         let body = resp.bytes().await.unwrap();
         // TODO
         match serde_json::from_slice::<BaseVkResponse<T>>(&body) {
-            Ok(d) => d,
+            Ok(res) => {
+                match res {
+                    BaseVkResponse::Response(r) => Ok(r),
+                    BaseVkResponse::Error(e) => Err(e)
+                }
+            }
             Err(e) => {
                 let log = format!("error: {} body: {:#?} response log: {}", e, body, response_log);
-                BaseVkResponse::Error(VkError::parse_data(None, log))
+                Err(VkError::parse_data(None, log))
             }
         }
     }
