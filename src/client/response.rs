@@ -16,6 +16,11 @@ pub struct VkError {
 }
 
 impl VkError {
+    pub fn merge_msg(&self) -> String {
+        let mut s = self.error_code.clone().to_string();
+        s.push_str(&self.error_msg);
+        s
+    }
     pub fn parse_data(msg: Option<String>, log: String) -> Self {
         Self {
             error_code: 0,
