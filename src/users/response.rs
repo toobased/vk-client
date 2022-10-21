@@ -1,8 +1,8 @@
 use serde::Deserialize;
 
 #[derive(Debug, Deserialize)]
-pub struct User {
-    pub id: u32,
+pub struct VkUser {
+    pub id: i32,
     pub first_name: String,
     pub last_name: String,
     pub deactivated: Option<String>,
