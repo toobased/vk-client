@@ -8,12 +8,12 @@ pub struct Attachment {
 #[derive(Debug, Deserialize, Default)]
 pub struct VkPhotoSize {
     pub url: String,
-    pub width: Option<String>,
-    pub height: Option<String>,
+    pub width: Option<u32>,
+    pub height: Option<u32>,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct VkPhoto {
     pub id: i32,
-    // pub sizes: Vec<VkPhotoSize>
+    pub sizes: Vec<VkPhotoSize>
 }
