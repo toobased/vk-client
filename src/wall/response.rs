@@ -2,12 +2,12 @@ use serde::Deserialize;
 
 use crate::attachments::models::Attachment;
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Default)]
 pub struct WallPost {
     pub id: i32,
     pub owner_id: i32,
-    pub from_id: i32,
-    pub created_by: i32,
+    pub from_id: Option<i32>,
+    pub created_by: Option<i32>,
     pub text: String,
     pub reply_owner_id: Option<u32>,
     pub reply_post_id: Option<u32>,
