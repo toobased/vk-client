@@ -2,7 +2,7 @@ use serde::Deserialize;
 
 use crate::attachments::models::Attachment;
 
-#[derive(Debug, Deserialize, Default)]
+#[derive(Debug, Deserialize, Default, Clone)]
 pub struct WallPost {
     pub id: i32,
     pub owner_id: i32,
@@ -24,4 +24,3 @@ pub struct WallPost {
     pub is_favorite: bool,
     pub postponed_id: Option<i32>
 }
-
