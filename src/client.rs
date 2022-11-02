@@ -75,6 +75,11 @@ impl VkClient {
         Self::init(&token)
     }
 
+    pub fn init_admin () -> Self {
+        let token = std::env::var("vk_admin_access_token").unwrap();
+        Self::init(&token)
+    }
+
     pub async fn base_get<P, T>(&self, method: &str, params: Option<P>) -> Result<T, VkError>
         where P: Serialize,
         T: DeserializeOwned
