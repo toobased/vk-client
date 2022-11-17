@@ -49,7 +49,7 @@ impl Default for VkApiConfig {
 
 #[derive(Debug, Default)]
 pub struct VkClient {
-    access_token: String,
+    pub access_token: String,
     pub app_config: VkAppConfig,
     pub api_config: VkApiConfig
 }
