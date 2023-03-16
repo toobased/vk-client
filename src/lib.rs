@@ -10,6 +10,7 @@ pub mod users;
 pub mod likes;
 pub mod groups;
 pub mod wall;
+pub mod photos;
 
 pub mod attachments;
 

@@ -93,15 +93,18 @@ impl VkClient {
             .append_pair("v", &api_v)
             .append_pair("access_token", &self.access_token);
 
+        type Q = HashMap<String, Option<String>>;
         if let Some(p) = params {
             let params_raw = serde_json::to_value::<P>(p).unwrap();
-            let params_map = serde_json::from_value::<HashMap<String, Option<String>>>(params_raw).unwrap();
+            let params_map = serde_json::from_value::<Q>(params_raw).unwrap();
             for (k, v) in params_map.iter() {
                 if let Some(value) = v {
                     url.query_pairs_mut().append_pair(&k, &value);
                 }
             }
         }
+
+        log::debug!("url query is {:?}", url.query());
 
         // TODO
         let resp: Response = reqwest::get(url).await.unwrap();
